@@ -1,12 +1,13 @@
-package problems;
+package receipts;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Receipt2 {		//daiso
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedEncodingException {
 		// TODO Auto-generated method stub
 		DecimalFormat k21_format = new DecimalFormat("###,###,###");
 		Calendar k21_cal1 = Calendar.getInstance();
@@ -14,20 +15,35 @@ public class Receipt2 {		//daiso
 		SimpleDateFormat k21_sdf1 = new SimpleDateFormat("MM월dd일");
 		k21_cal1.add(Calendar.DATE, 14);
 		
-		String k21_item1 = "퓨어메딕 비말차단용마스크(최고급형)";
+		String k21_item1 = "3중필터 일회용마스크 50매 대형 블랙 화이트";
 		String k21_itemCode1 = "1031615";
 		int k21_itemPrice1 = 3000;
 		int k21_itemQty1 = 1;
 
-		String k21_item2 = "슬라이드식명찰(가로형)       ";
+		String k21_item2 = "라탄 패턴 바구니 바스켓";
 		String k21_itemCode2 = "11008152";
 		int k21_itemPrice2 = 1000;
 		int k21_itemQty2 = 2;
 		
-		String k21_item3 = "매직흡착 인테리어후크(알루미늄타입)";
+		String k21_item3 = "모형과일 40종";
 		String k21_itemCode3 = "1020800";
 		int k21_itemPrice3 = 1000;
 		int k21_itemQty3 = 1;
+
+//		String k21_item1 = "퓨어메딕 비말차단용마스크(최고급형)";
+//		String k21_itemCode1 = "1031615";
+//		int k21_itemPrice1 = 3000;
+//		int k21_itemQty1 = 1;
+//		
+//		String k21_item2 = "슬라이드식명찰(가로형)       ";
+//		String k21_itemCode2 = "11008152";
+//		int k21_itemPrice2 = 1000;
+//		int k21_itemQty2 = 2;
+//		
+//		String k21_item3 = "매직흡착 인테리어후크(알루미늄타입)";
+//		String k21_itemCode3 = "1020800";
+//		int k21_itemPrice3 = 1000;
+//		int k21_itemQty3 = 1;
 		
 		System.out.printf("%25s\n", "\"국민가게, 다이소\"");
 		System.out.printf("%.45s\n", "(주)아성다이소_분당서현점");
@@ -54,14 +70,18 @@ public class Receipt2 {		//daiso
 		int k21_itemAmount1 = k21_itemPrice1 * k21_itemQty1;
 		int k21_itemAmount2 = k21_itemPrice2 * k21_itemQty2;
 		int k21_itemAmount3 = k21_itemPrice3 * k21_itemQty3;
-		
-		System.out.printf("%.14s %8s %3d %8s\n", k21_item1, k21_format.format(k21_itemPrice1), 
+		gettingBytes by = new gettingBytes();
+		String item1Str = by.gettingSpaces(k21_item1.substring(0,Math.min(14,k21_item1.length())), by.gettingWidth(k21_item1.substring(0,Math.min(13,k21_item1.length()))),20);
+		String item2Str = by.gettingSpaces(k21_item2.substring(0,Math.min(14,k21_item2.length())), by.gettingWidth(k21_item2.substring(0,Math.min(13,k21_item2.length()))),20);
+		String item3Str = by.gettingSpaces(k21_item3.substring(0,Math.min(14,k21_item3.length())), by.gettingWidth(k21_item3.substring(0,Math.min(13,k21_item3.length()))),20);
+	
+		System.out.printf("%.16s %8s %3d %8s\n", item1Str, k21_format.format(k21_itemPrice1), 
 				k21_itemQty1, k21_format.format(k21_itemAmount1));
 		System.out.printf("[%s]\n", k21_itemCode1);
-		System.out.printf("%.16s %8s %3d %8s\n", k21_item2, k21_format.format(k21_itemPrice2), 
+		System.out.printf("%.16s %8s %3d %8s\n", new String(k21_item2.getBytes(),0,k21_item2.length()*2), k21_format.format(k21_itemPrice2), 
 				k21_itemQty2, k21_format.format(k21_itemAmount2));
 		System.out.printf("[%s]\n", k21_itemCode2);
-		System.out.printf("%.14s %8s %3d %8s\n", k21_item3, k21_format.format(k21_itemPrice3), 
+		System.out.printf("%.16s %8s %3d %8s\n", item3Str, k21_format.format(k21_itemPrice3), 
 				k21_itemQty3, k21_format.format(k21_itemAmount3));
 		System.out.printf("[%s]\n", k21_itemCode3);
 		

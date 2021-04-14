@@ -1,4 +1,4 @@
-package problems;
+package receipts;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
