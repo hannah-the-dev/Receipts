@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Receipt3 {		//emart  full: %34s
+public class Receipt3_width {		//emart  full: %34s
 
 	public static void main(String[] args) {
 		String[] item = {
@@ -131,19 +131,19 @@ public class Receipt3 {		//emart  full: %34s
 		Calendar k21_cal = Calendar.getInstance();								// 현재 시스템 시간 인스턴스 받아오기
 		SimpleDateFormat k21_sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	// 날짜 포맷 지정
 		
-		System.out.printf("    	emart   이마트 죽전점 (031)888-1234\n");
-		System.out.printf("    	emart   206-86-50913 강희석\n");
-		System.out.printf("    	emart   용인 수지구 포은대로 552\n\n");
+		System.out.printf("  emart   이마트 죽전점 (031)888-1234\n");
+		System.out.printf("  emart   206-86-50913 강희석\n");
+		System.out.printf("  emart   용인 수지구 포은대로 552\n\n");
 		System.out.printf("영수증 미지참시 교환/환불 불가\n");
 		System.out.printf("정상상품에 한함, 30일 이내(신선7일)\n");
 		System.out.printf("※일부 브랜드매장 제외(매장 고지물참조)\n");
 		System.out.printf("교환/환불 구매점에서 가능(결제카드 지참)\n\n");
 		
-		System.out.printf("[구매]%.16s             POS:%s\n", k21_sdf.format(k21_cal.getTime()), "0011-9861");
+		System.out.printf("[구매]%.16s      POS:%s\n", k21_sdf.format(k21_cal.getTime()), "0011-9861");
 		// 구매 시간은 초단위까지 표시, 포스 번호 표시
-		System.out.printf("------------------------------------------------\n");
-		System.out.printf("%-23s %s %4s %6s\n", "  상 품 명", "단 가", "수량", "금 액");
-		System.out.printf("------------------------------------------------\n");
+		System.out.printf("-----------------------------------------\n");
+		System.out.printf("%-16s %s %4s %6s\n", "  상 품 명", "단 가", "수량", "금 액");
+		System.out.printf("-----------------------------------------\n");
 		
 		int k21_dutyFree = 0;			// 면세 품목 합계 저장용
 		int k21_duty = 0;				// 과세 품목 합계 저장용
@@ -159,40 +159,40 @@ public class Receipt3 {		//emart  full: %34s
 				System.out.printf("  ") ;						// 공란 출력
 				k21_duty += k21_qty[k21_i] * k21_price[k21_i];	// duty에 합산
 			}
-			String k21_itemTrimmed = by.gettingSpaces(item[k21_i], 10);	// gettingSpaces가 반환하는 문자열 itemTrimmed 선언
-			System.out.printf("%s %10s %2d %11s\n", k21_itemTrimmed, k21_format.format(k21_price[k21_i]), 
+			String k21_itemTrimmed = by.gettingSpaces(item[k21_i], 8);	// gettingSpaces가 반환하는 문자열 itemTrimmed 선언
+			System.out.printf("%s%10s%2d%11s\n", k21_itemTrimmed, k21_format.format(k21_price[k21_i]), 
 					k21_qty[k21_i], k21_format.format(k21_qty[k21_i] * k21_price[k21_i]));
 			// 반환된 품목명은 10자리이므로 그대로 표시, 단가, 수량, 금액 순서대로 반복문으로 한줄씩 불러옴
 			// 숫자 포맷 적용시 String으로 인식함 주의
 			k21_counter += k21_qty[k21_i]; 			// 품목별 수량 합산
 				
 			if (k21_i % 5 == 4 && k21_i != item.length-1)		// 5줄 출력 후 구분자 인쇄
-				System.out.printf("------------------------------------------------\n");
+				System.out.printf("-----------------------------------------\n");
 		}
 		
 		int k21_beforeTax = (int) Math.ceil(k21_duty/1.1);		// 과세액 계산 올림 처리
 		// 한글이 1자 적으면 그만큼 자리수 늘려줘야 맞음 5--29, 2--31
-		System.out.printf("\n%28s %14s\n", "총 품목 수량", k21_format.format(k21_counter));		// 총 품목 수량
-		System.out.printf("%29s %14s\n", "(*)면 세  물 품", k21_format.format(k21_dutyFree));		// 면세 총액
-		System.out.printf("%29s %14s\n", "과 세  물 품", k21_format.format(k21_beforeTax));	// 과세 총액
-		System.out.printf("%30s %14s\n", "부   가   세", k21_format.format(k21_duty - k21_beforeTax));	// 세액
-		System.out.printf("%31s %14s\n", "합        계", k21_format.format(k21_duty+k21_dutyFree));		// 합계(=과세+면세+부가세)
-		System.out.printf("%-27s %14s\n", "결 제 대 상 금 액", k21_format.format(k21_duty+k21_dutyFree));	// 결제대상금액 = 합계액
-		System.out.printf("------------------------------------------------\n");
+		System.out.printf("\n%21s %14s\n", "총 품목 수량", k21_format.format(k21_counter));		// 총 품목 수량
+		System.out.printf("%22s %14s\n", "(*)면 세  물 품", k21_format.format(k21_dutyFree));		// 면세 총액
+		System.out.printf("%22s %14s\n", "과 세  물 품", k21_format.format(k21_beforeTax));	// 과세 총액
+		System.out.printf("%23s %14s\n", "부   가   세", k21_format.format(k21_duty - k21_beforeTax));	// 세액
+		System.out.printf("%24s %14s\n", "합        계", k21_format.format(k21_duty+k21_dutyFree));		// 합계(=과세+면세+부가세)
+		System.out.printf("%-20s %14s\n", "결 제 대 상 금 액", k21_format.format(k21_duty+k21_dutyFree));	// 결제대상금액 = 합계액
+		System.out.printf("-----------------------------------------\n");
 		String k21_credit = "123456789010";											// 카드 번호
-		System.out.printf("%s %21s/%s\n", "0021 KEB 하나카드", by.gettingAnonymous(k21_credit,7,8), "12345678");		//카드 번호 가리기, 카드 이름 잘림
-		System.out.printf("%-19s %21s\n", "카드결제(IC)", "일시불 / " + k21_format.format(k21_duty+k21_dutyFree));			// 카드 결제 정보, 금액
-		System.out.printf("------------------------------------------------\n");
-		System.out.printf("              [신세계포인트 적립]\n");
+		System.out.printf("%s %14s/%s\n", "0021 KEB 하나카드", by.gettingAnonymous(k21_credit,7,8), "12345678");		//카드 번호 가리기, 카드 이름 잘림
+		System.out.printf("%-12s %21s\n", "카드결제(IC)", "일시불 / " + k21_format.format(k21_duty+k21_dutyFree));			// 카드 결제 정보, 금액
+		System.out.printf("-----------------------------------------\n");
+		System.out.printf("          [신세계포인트 적립]\n");
 		System.out.printf("%s 고객님의 포인트 현황입니다.\n", by.gettingAnonymous("안설란",2,2));			// 이름의 중간자만 가리고 싶을 때 사용
-		System.out.printf("금회발생포인트 %20s %12s\n", by.gettingAnonymous("9350009558",5,6), 164);			// 중간자만 가리고 싶을 때 사용 방법
-		System.out.printf("누계(가용)포인트 %17s( %11s)\n", k21_format.format(3400+164), k21_format.format(3400));	// 가용 포인트 + 금회 발생 포인트 = 누계 포인트
+		System.out.printf("금회발생포인트 %18s%8s\n", by.gettingAnonymous("9350009558",5,6), 164);			// 중간자만 가리고 싶을 때 사용 방법
+		System.out.printf("누계(가용)포인트 %12s(%10s)\n", k21_format.format(3400+164), k21_format.format(3400));	// 가용 포인트 + 금회 발생 포인트 = 누계 포인트
 		System.out.printf("*신세계포인트 유효기간은 2년입니다.\n");
-		System.out.printf("------------------------------------------------\n");
-		System.out.printf("       구매금액기준 무료주차시간 자동 부여\n");
-		System.out.printf("차량번호 : %32.3s****\n", "12가1234");							// 차량 번호 가리기
-		System.out.printf("입차시간 : %37s\n", k21_sdf.format(k21_cal.getTime()));		// 입차시간: 입차시간 확인 로직 불분명, 인스턴스 시간 전체 출력
-		System.out.printf("------------------------------------------------\n");
-		System.out.printf("캐셔:%s %.1s00 %31d\n", "011202", "최수지", 1150);			// 캐셔 번호, 이름 일부 인쇄
+		System.out.printf("-----------------------------------------\n");
+		System.out.printf("   구매금액기준 무료주차시간 자동 부여\n");
+		System.out.printf("차량번호 : %25.3s****\n", "12가1234");							// 차량 번호 가리기
+		System.out.printf("입차시간 : %30s\n", k21_sdf.format(k21_cal.getTime()));		// 입차시간: 입차시간 확인 로직 불분명, 인스턴스 시간 전체 출력
+		System.out.printf("-----------------------------------------\n");
+		System.out.printf("캐셔:%s %.1s00 %24d\n", "011202", "최수지", 1150);			// 캐셔 번호, 이름 일부 인쇄
 	}
 }

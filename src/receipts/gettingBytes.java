@@ -19,8 +19,14 @@ public class gettingBytes {
 				break;									// break, 
 				}
 			}
-		
+		if(k21_width %2 == 1) {
+			k21_cutHere -= 1;
+		}
 		String k21_answer = k21_words.substring(0, k21_cutHere);	//cutHere 변수에서 자름
+		if(k21_width %2 == 1) {
+			k21_answer += " ";
+		}
+	
 		return k21_answer;
 	}
 
