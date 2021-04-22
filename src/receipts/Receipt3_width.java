@@ -130,6 +130,7 @@ public class Receipt3_width {		//emart  full: %34s
 		DecimalFormat k21_format = new DecimalFormat("###,###,###"); 			//출력 포맷 지정
 		Calendar k21_cal = Calendar.getInstance();								// 현재 시스템 시간 인스턴스 받아오기
 		SimpleDateFormat k21_sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	// 날짜 포맷 지정
+		SimpleDateFormat k21_sdfb = new SimpleDateFormat("yyyyMMdd");	// 바코드용 날짜 포맷 지정
 		
 		System.out.printf("  emart   이마트 죽전점 (031)888-1234\n");
 		System.out.printf("  emart   206-86-50913 강희석\n");
@@ -170,7 +171,7 @@ public class Receipt3_width {		//emart  full: %34s
 				System.out.printf("-----------------------------------------\n");
 		}
 		
-		int k21_beforeTax = (int) Math.ceil(k21_duty/1.1);		// 과세액 계산 올림 처리
+		int k21_beforeTax = (int) Math.floor(k21_duty/11.0*10);		// 과세액 계산 올림 처리
 		// 한글이 1자 적으면 그만큼 자리수 늘려줘야 맞음 5--29, 2--31
 		System.out.printf("\n%21s %14s\n", "총 품목 수량", k21_format.format(k21_counter));		// 총 품목 수량
 		System.out.printf("%22s %14s\n", "(*)면 세  물 품", k21_format.format(k21_dutyFree));		// 면세 총액
@@ -193,6 +194,7 @@ public class Receipt3_width {		//emart  full: %34s
 		System.out.printf("차량번호 : %25.3s****\n", "12가1234");							// 차량 번호 가리기
 		System.out.printf("입차시간 : %30s\n", k21_sdf.format(k21_cal.getTime()));		// 입차시간: 입차시간 확인 로직 불분명, 인스턴스 시간 전체 출력
 		System.out.printf("-----------------------------------------\n");
-		System.out.printf("캐셔:%s %.1s00 %24d\n", "011202", "최수지", 1150);			// 캐셔 번호, 이름 일부 인쇄
+		System.out.printf("캐셔:%s %.1s00 %24d\n", "011202", "최수지", 1150);// 캐셔 번호, 이름 일부 인쇄
+		System.out.printf("      %s/%d/%d/%d",k21_sdfb.format(k21_cal.getTime()),12345678,12345678,31);
 	}
 }
