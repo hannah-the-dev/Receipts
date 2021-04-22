@@ -94,10 +94,18 @@ public class Receipt3 {		//emart  full: %34s
 //				"엄마의선택 100% 과탄산소다 1KG",
 				
 		};				// 구매 품목 저장 array
+//		int[] k21_price = {
+//				1500, 1700, 2500, 1800, 2500,
+//				7800, 3200, 6300, 4250, 5100,
+//				3800, 4400, 5000, 4480, 6700,
+//				6500, 6370, 3400, 7560, 1300,
+//				3500, 4750, 6830, 9210, 3420,
+//				4500, 3480, 6400, 3420, 5300
+//		};				// 구매 단가
 		int[] k21_price = {
-				1500, 1700, 2500, 1800, 2500,
-				7800, 3200, 6300, 4250, 5100,
-				3800, 4400, 5000, 4480, 6700,
+				150000, 17000, 200500, 1800000, 2000500,
+				7800, 3200, 6300000, 425000, 510000,
+				3800, 4400000, 500000, 9990000, 6700,
 				6500, 6370, 3400, 7560, 1300,
 				3500, 4750, 6830, 9210, 3420,
 				4500, 3480, 6400, 3420, 5300
@@ -152,7 +160,7 @@ public class Receipt3 {		//emart  full: %34s
 				k21_duty += k21_qty[k21_i] * k21_price[k21_i];	// duty에 합산
 			}
 			String k21_itemTrimmed = by.gettingSpaces(item[k21_i], 10);	// gettingSpaces가 반환하는 문자열 itemTrimmed 선언
-			System.out.printf("%s	%8s %4d %10s\n", k21_itemTrimmed, k21_format.format(k21_price[k21_i]), 
+			System.out.printf("%s	%10s %2d %10s\n", k21_itemTrimmed, k21_format.format(k21_price[k21_i]), 
 					k21_qty[k21_i], k21_format.format(k21_qty[k21_i] * k21_price[k21_i]));
 			// 반환된 품목명은 10자리이므로 그대로 표시, 단가, 수량, 금액 순서대로 반복문으로 한줄씩 불러옴
 			// 숫자 포맷 적용시 String으로 인식함 주의
@@ -173,7 +181,7 @@ public class Receipt3 {		//emart  full: %34s
 		System.out.printf("------------------------------------------------\n");
 		String k21_credit = "123456789010";											// 카드 번호
 		System.out.printf("%s %21s/%s\n", "0021 KEB 하나카드", by.gettingAnonymous(k21_credit,7,8), "12345678");		//카드 번호 가리기, 카드 이름 잘림
-		System.out.printf("%-19s %11s / %4s\n", "카드결제(IC)", "일시불",  k21_format.format(k21_duty+k21_dutyFree));			// 카드 결제 정보, 금액
+		System.out.printf("%-19s %21s\n", "카드결제(IC)", "일시불 / " + k21_format.format(k21_duty+k21_dutyFree));			// 카드 결제 정보, 금액
 		System.out.printf("------------------------------------------------\n");
 		System.out.printf("              [신세계포인트 적립]\n");
 		System.out.printf("%s 고객님의 포인트 현황입니다.\n", by.gettingAnonymous("안설란",2,2));			// 이름의 중간자만 가리고 싶을 때 사용
