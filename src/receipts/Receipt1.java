@@ -15,8 +15,8 @@ public class Receipt1 {
 		int k21_slipNum = 41218;												// 전표 번호 생성
 //		Scanner sc = new Scanner(System.in);
 //		int k21_iPrice = sc.nextInt();													// amount after tax	
-		int k21_iPrice = 5000;													// amount after tax	
-		int k21_beforeTax = (int) Math.floor(k21_iPrice/11.0*10);						// 세전 금액 계산, 올림 금액
+		int k21_iPrice = 40000;													// amount after tax	
+		int k21_beforeTax = (int) Math.floor(k21_iPrice/11.0*10);						// 세전 금액 계산, 버림 금액
 
 		System.out.printf(" 신용 승인\n");										
 		System.out.printf("단말기 : 2N68665898     전표번호 : %06d\n",k21_slipNum); // 전표번호 6자리, 부족하면 0으로 채우기
@@ -29,7 +29,7 @@ public class Receipt1 {
 		System.out.printf("- - - - - - - - - - - - - - - - - - - - -\n");
 		
 		System.out.printf("금  액 %31s 원\n", k21_format.format(k21_beforeTax));		// 세전 금액 포맷대로 출력
-		System.out.printf("부가세 %31s 원\n", k21_format.format(k21_iPrice-k21_beforeTax));	// 세액 계산, 버림금액 출력
+		System.out.printf("부가세 %31s 원\n", k21_format.format(k21_iPrice-k21_beforeTax));	// 세액 계산, 올림금액 출력
 		System.out.printf("합  계 %31s 원\n", k21_format.format(k21_iPrice));		// 세후 금액 포맷대로 출력
 		System.out.printf("- - - - - - - - - - - - - - - - - - - - -\n");
 		String k21_credit = "1234-5678-9010-1112";								// 카드번호

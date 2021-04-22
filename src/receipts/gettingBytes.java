@@ -19,15 +19,15 @@ public class gettingBytes {
 				break;									// break, 
 				}
 			}
-		if(k21_width %2 == 1) {
-			k21_cutHere -= 1;
+		if(k21_width %2 == 1) {							// 너비가 홀수일경우
+			k21_cutHere -= 1;							// 1칸 전에서 자르도록 변수 수정
 		}
 		String k21_answer = k21_words.substring(0, k21_cutHere);	//cutHere 변수에서 자름
-		if(k21_width %2 == 1) {
-			k21_answer += " ";
+		if(k21_width %2 == 1) {							// 너비가 홀수인 경우에만
+			k21_answer += " ";							// 뒤에 공백 1칸 추가(칸 맞추기 위함)
 		}
 	
-		return k21_answer;
+		return k21_answer;								// 자른 문자 리턴
 	}
 
 	// 이름, 카드번호 등 개인정보 마스킹
@@ -43,6 +43,6 @@ public class gettingBytes {
 		}
 		k21_answer += k21_original.substring(end);			// end 이후 문자 그대로 저장
 		
-		return k21_answer;
+		return k21_answer;									// 마스킹한 문자 리턴
 	}
 }

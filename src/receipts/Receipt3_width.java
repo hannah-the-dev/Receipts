@@ -30,15 +30,13 @@ public class Receipt3_width {		//emart  full: %34s
 //				"다우니퍼퓸 초고농축 섬유유연제 2L(블랙 미스티크)",
 //				"다우니퍼퓸 초고농축 섬유유연제 2L(코튼 퓨어 러브)",
 //				"다우니퍼퓸 초고농축 섬유유연제 2L(스프링 가든 러브)",
-//				"르샤트라 섬유유연제 1.6L(피오니부케)",
-//				"르샤트라 섬유유연제1.6L(뮤게부케)",
 //				"르샤트라 섬유유연제1.6L(라벤더부케)",
 //				"LG생활건강아우라 딜라이트 2.3L(스윗만다린)",
 //				"LG생활건강아우라 딜라이트 2.3L(매그놀리아)",
 //				"LG생활건강아우라 딜라이트2.3L(플로럴)",
-//				
 //				"엄마의선택 구연산1KG",
 //				"랩신 홈백신 욕실용 900ML",
+//				
 //				"랩신 홈백신 주방용 900ML",
 //				"[헨켈] 브레프 파워 액티브 레몬 2P",
 ////				"[헨켈] 브레프 파워 액티브 오션 2P",
@@ -47,7 +45,9 @@ public class Receipt3_width {		//emart  full: %34s
 //				"LG생활건강[홈스타] 뿌리는 곰팡이 싹 900ml",
 //				"[홈스타] 욕실세정용 900ML",
 //				"LG생활건강[홈스타] 강력세정 주방용 900ml",
-//				"LG생활건강[홈스타] 착붙는 락스 스프레이 900ml"
+//				"LG생활건강[홈스타] 착붙는 락스 스프레이 900ml",
+//				"르샤트라",
+//				"f"
 				
 //				"[JAJU/자주] 이지케어 리넨 랩 스커트_OATMEAL",
 //				"[JAJU/자주] 슬림핏 립 반팔 티셔츠_WHITE",
@@ -78,7 +78,7 @@ public class Receipt3_width {		//emart  full: %34s
 //				"암앤해머 클린버스트 세탁세제 2.21L",
 //				"비트액체 2.4L*2 겸용",
 //				"피지 파워젤 세제 오리지널2.7L",
-//				"피지 파워젤 세제 프레쉬2.7L",
+//				"피지 파워젤 세제 프레쉬2.7L
 //				"리큐 진한겔 플러스 2.4L*2.4L(일반/드럼겸용)",
 //				"고농축 섬유유연제 엑스퍼트 2L(실내건조)",
 				
@@ -108,10 +108,10 @@ public class Receipt3_width {		//emart  full: %34s
 				3800, 4400000, 500000, 9990000, 6700,
 				6500, 6370, 3400, 7560, 1300,
 				3500, 4750, 6830, 9210, 3420,
-				4500, 3480, 6400, 3420, 5300
+				4500, 3480, 6400, 100, 1
 		};				// 구매 단가
 		int[] k21_qty = {
-				1, 3, 1, 2, 5,
+				1, 3, 1, 2, 10,
 				2, 1, 1, 1, 2,
 				3, 1, 1, 3, 4,
 				3, 3, 1, 4, 1,
@@ -153,15 +153,15 @@ public class Receipt3_width {		//emart  full: %34s
 		
 		for (int k21_i = 0; k21_i < item.length; k21_i++) {		// 품목 개수만큼 반복
 			if (k21_tax[k21_i] == false) { 						// 해당 품목 면세품목일 경우
-				System.out.printf("* ");						// * 출력
+				System.out.printf("*");						// * 출력
 				k21_dutyFree += k21_qty[k21_i] * k21_price[k21_i];	// dutyFree에 합산
 			}
 			else {												// 면세 품목이 아닐 경우
-				System.out.printf("  ") ;						// 공란 출력
+				System.out.printf(" ") ;						// 공란 출력
 				k21_duty += k21_qty[k21_i] * k21_price[k21_i];	// duty에 합산
 			}
 			String k21_itemTrimmed = by.gettingSpaces(item[k21_i], 8);	// gettingSpaces가 반환하는 문자열 itemTrimmed 선언
-			System.out.printf("%s%10s%2d%11s\n", k21_itemTrimmed, k21_format.format(k21_price[k21_i]), 
+			System.out.printf("%s%10s%3d%11s\n", k21_itemTrimmed, k21_format.format(k21_price[k21_i]), 
 					k21_qty[k21_i], k21_format.format(k21_qty[k21_i] * k21_price[k21_i]));
 			// 반환된 품목명은 10자리이므로 그대로 표시, 단가, 수량, 금액 순서대로 반복문으로 한줄씩 불러옴
 			// 숫자 포맷 적용시 String으로 인식함 주의
@@ -171,13 +171,13 @@ public class Receipt3_width {		//emart  full: %34s
 				System.out.printf("-----------------------------------------\n");
 		}
 		
-		int k21_beforeTax = (int) Math.floor(k21_duty/11.0*10);		// 과세액 계산 올림 처리
-		// 한글이 1자 적으면 그만큼 자리수 늘려줘야 맞음 5--29, 2--31
+		int k21_beforeTax = (int) Math.floor(k21_duty/11.0*10);		// 과세액 계산 버림 처리
+		// 한글이 1자 적으면 그만큼 자리수 늘려줘야 맞음
 		System.out.printf("\n%21s %14s\n", "총 품목 수량", k21_format.format(k21_counter));		// 총 품목 수량
 		System.out.printf("%22s %14s\n", "(*)면 세  물 품", k21_format.format(k21_dutyFree));		// 면세 총액
 		System.out.printf("%22s %14s\n", "과 세  물 품", k21_format.format(k21_beforeTax));	// 과세 총액
 		System.out.printf("%23s %14s\n", "부   가   세", k21_format.format(k21_duty - k21_beforeTax));	// 세액
-		System.out.printf("%24s %14s\n", "합        계", k21_format.format(k21_duty+k21_dutyFree));		// 합계(=과세+면세+부가세)
+		System.out.printf("%24s %14s\n", "합        계", k21_format.format(k21_duty+k21_dutyFree));		// 합계(=과세(세후)+면세)
 		System.out.printf("%-20s %14s\n", "결 제 대 상 금 액", k21_format.format(k21_duty+k21_dutyFree));	// 결제대상금액 = 합계액
 		System.out.printf("-----------------------------------------\n");
 		String k21_credit = "123456789010";											// 카드 번호
