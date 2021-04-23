@@ -1,6 +1,6 @@
-package receipts;
+package receiptsSep;
 
-public class gettingBytes {				
+public class GettingBytes {				
 	// 길이 입력받은 길이만큼 자르는 매서드	       //bytes: 보여주고 싶은 문자열의 너비
 	public String gettingSpaces(String k21_words, int k21_bytes) throws StringIndexOutOfBoundsException{
 		k21_words += "                  ";				// words 문자열이 짧을 경우 에러 방지하기 위해 공백 추가
@@ -29,7 +29,6 @@ public class gettingBytes {
 
 	// 이름, 카드번호 등 개인정보 마스킹
 	public String gettingAnonymous(String k21_original, int start, int end) {		
-		int k21_len = k21_original.length();				// 길이 변수 생성
 		String k21_answer = k21_original.charAt(0)+"";		// 첫글자로 리턴문구 첫자 초기화
 		
 		for (int k21_i = 1; k21_i < start-1; k21_i++) {		// start 전까지는
@@ -37,6 +36,20 @@ public class gettingBytes {
 		}
 		for (int k21_i = start; k21_i < end+1; k21_i++) {	// start부터 end 까지는 * 저장
 			k21_answer += "*";	
+		}
+		k21_answer += k21_original.substring(end);			// end 이후 문자 그대로 저장
+		
+		return k21_answer;									// 마스킹한 문자 리턴
+	}
+
+	public String gettingAnonymous(String k21_original, int start, int end, char mask) {		
+		String k21_answer = k21_original.charAt(0)+"";		// 첫글자로 리턴문구 첫자 초기화
+		
+		for (int k21_i = 1; k21_i < start-1; k21_i++) {		// start 전까지는
+			k21_answer += k21_original.charAt(k21_i)+"";	// 원 문자 그대로 저장
+		}
+		for (int k21_i = start; k21_i < end+1; k21_i++) {	// start부터 end 까지는 * 저장
+			k21_answer += mask;	
 		}
 		k21_answer += k21_original.substring(end);			// end 이후 문자 그대로 저장
 		

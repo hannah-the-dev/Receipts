@@ -126,7 +126,7 @@ public class Receipt3_width {		//emart  full: %34s
 				2, 2, 1, 1, 4,
 				5, 1, 3, 1, 1
 		};				// 품목당 구매 개수
-				boolean[] k21_tax = {
+		boolean[] k21_tax = {
 				true, true, true, true, true,
 				true, false, true, true, false,
 				true, true, false, true, true,
